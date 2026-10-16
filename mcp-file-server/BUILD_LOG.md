@@ -165,8 +165,8 @@ Format: date · milestone · what was done · decisions and why · evidence · n
 **Known limit (threat notes)**
 - The reviewer's append_file can still add text to any workspace file. Narrowing it to log files is a stretch item.
 
-**Evidence (fill in)**
-- Inspector: worker URL lists ___ tools, reviewer URL lists ___ tools.
-- `npm test`: 45 passing.
+**Evidence**
+- Inspector: worker URL lists 8 tools (all except delete_file), reviewer URL lists 5 tools (list_files, read_file, append_file, git_status, git_diff), admin URL lists all 9 tools.
+- `npm test`: 45 of 45 passing.
 
 
