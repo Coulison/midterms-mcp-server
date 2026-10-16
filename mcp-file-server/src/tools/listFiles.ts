@@ -1,32 +1,39 @@
-import { readdir } from "node:fs/promises";
+import { readdir, stat } from "node:fs/promises";
+import { join } from "node:path";
+import { z } from "zod";
 import type { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
-import { WORKSPACE_ROOT } from "../config.js";
+import { resolveSafe } from "../sandbox.js";
+import { ok, toToolError } from "./util.js";
 
 export function registerListFiles(server: McpServer) {
     server.registerTool(
         "list_files",
         {
             description:
-                "List the files and folders at the top level of the workspace. " +
+                "List files and folders in one workspace folder (not recursive). " +
                 "Use this first to see what exists before reading or writing. " +
-                "Returns one entry per line, marked 'dir' or 'file'. " +
-                "Fails with isError if the workspace root is missing or unreadable.",
+                "Output is one entry per line: 'dir', 'file' (with size) or 'link'. " +
+                "Fails if the folder does not exist or the path leaves the workspace.",
+            inputSchema: {
+                path: z.string().default(".").describe("Folder relative to the workspace root. '.' is the root."),
+            },
         },
-        async () => {
+        async ({ path: dir }) => {
             try {
-                const entries = await readdir(WORKSPACE_ROOT, { withFileTypes: true });
-                const lines = entries
-                    .map((e) => `${e.isDirectory() ? "dir " : "file"}  ${e.name}`)
-                    .sort();
-                return {
-                    content: [{ type: "text", text: lines.length ? lines.join("\n") : "(workspace is empty)" }],
-                };
+                const abs = await resolveSafe(dir);
+                const entries = await readdir(abs, { withFileTypes: true });
+                const lines = await Promise.all(
+                    entries.map(async (e) => {
+                        if (e.isSymbolicLink()) return `link  ${e.name}`;
+                        if (e.isDirectory()) return `dir   ${e.name}/`;
+                        const { size } = await stat(join(abs, e.name));
+                        return `file  ${e.name}  (${size} bytes)`;
+                    })
+                );
+                lines.sort();
+                return ok(lines.length ? lines.join("\n") : "(empty folder)");
             } catch (err) {
-                const code = (err as NodeJS.ErrnoException).code ?? "UNKNOWN";
-                return {
-                    isError: true,
-                    content: [{ type: "text", text: `Could not list the workspace (${code}).` }],
-                };
+                return toToolError(err);
             }
         }
     );
