@@ -114,3 +114,40 @@ Format: date · milestone · what was done · decisions and why · evidence · n
 - Git history check for the old secret (`git log -S`): not run. Open item.
 - Secret-in-URL risk: visible in the connector screen, ngrok request viewer, and any screenshot. Blur it in all evidence.
 - Public surface limited to the workspace root through `resolveSafe()`; the TOCTOU gap from M2 still applies.
+
+## 10-17-2026 · M4 Hardening, Audit & Git-Lite · DONE
+
+**Plan**
+- Guards: append-only files (`PLAN_LOG.md`, `CHECKPOINTS.md`, `DECISIONS.md`), handoff files protected from deletion (`PROJECT_STATE.md` + append-only), null-byte check (`assertTextContent`).
+- Block `.git` access and Windows 8.3 short names (`NAME~1`) in `resolveSafe`.
+- Audit log: wrap MCP server tools to log timestamp, tool name, sanitized args (bulky content truncated to character count), success/failure status, execution time in ms, and error messages to `logs/calls.jsonl` outside the workspace.
+- Tools: `append_file`, `git_status`, `git_diff` (truncated at 8000 chars, supports `--stat`), and `git_commit` (`--no-verify`).
+- Server startup auto-initializes workspace git repository (`ensureRepo`).
+- Handoff protocol specification and template files in `workspace/`.
+
+**Progress**
+- `src/guards.ts` implemented with `assertCanRewrite`, `assertCanDelete`, and `assertTextContent`.
+- `src/sandbox.ts` updated with `assertNotReserved` blocking `.git` and 8.3 short names.
+- `src/tools/util.ts` updated with `toToolError` mapping `GuardError`, `SandboxError`, and `GitError`.
+- `src/tools/writeFile.ts`, `src/tools/strReplace.ts`, `src/tools/deleteFile.ts`, and `src/tools/listFiles.ts` tightened with guards and `.git` hiding.
+- `src/audit.ts` added and integrated into `src/server.ts` via `withAudit`.
+- `src/git.ts` and `src/tools/gitTools.ts` implemented and registered in `server.ts`.
+- `src/index.ts` calls `ensureRepo()` prior to starting the HTTP server.
+- Workspace git repo initialized with baseline and clean demo handoff files.
+
+**Evidence**
+- `npm test`: 41 of 41 tests passing (`tests/sandbox.test.ts` and `tests/guards.test.ts`).
+  - Guards tested: rewrites refused for append-only files, deletes refused for handoff files, null-bytes refused for content.
+  - Sandbox tested: traversal escapes rejected, `.git` paths rejected (`.git/config`, `.GIT/hooks/pre-commit`, `demo/.git/config`, `.git./config`), 8.3 names rejected (`GIT~1/config`, `PLAN_L~1.MD`), valid paths accepted (`.gitignore`, `.github/workflows/x.yml`, `notes.git/readme.txt`).
+- `npm run build`: `tsc` compiles with 0 errors.
+- `pm2 status`: both `mcp-server` and `mcp-tunnel` online.
+- `git -C workspace status --short --branch`: clean (`## main`).
+- `git -C workspace log --oneline`: shows commits `M4 baseline` and `reset demo handoff files before M5`.
+- `logs/calls.jsonl`: verified lines record `tool`, `args` (`<N chars>`), `ok`, `ms`, and errors without leaking secrets or file contents.
+- Repo hygiene: `git status` clean; no secrets found in `BUILD_LOG.md`; no `.env`, `logs/`, or `workspace/` files tracked.
+
+**Decisions**
+- Workspace has an independent git repo isolated from the outer project git repo.
+- Commit operations use `--no-verify` as defense-in-depth alongside sandbox `.git` blocking.
+- `logs/` directory placed outside `workspace/` and ignored in `.gitignore` so agent sessions cannot alter or delete the audit log.
+
