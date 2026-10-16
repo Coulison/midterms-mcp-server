@@ -15,6 +15,7 @@ const MCP_ROUTE = `/mcp/${MCP_PATH_SECRET}`;
 mkdirSync(WORKSPACE_ROOT, { recursive: true });
 
 const app = express();
+app.disable("x-powered-by");
 app.use(express.json());
 
 // Stateless mode: a fresh server + transport per request.
