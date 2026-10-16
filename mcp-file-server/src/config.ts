@@ -9,3 +9,4 @@ export const MAX_READ_CHARS = 20_000;
 export const MAX_FILE_BYTES = 1_000_000;
 
 export const MCP_PATH_SECRET = process.env.MCP_PATH_SECRET ?? "";
+export const LOG_DIR = path.resolve(process.env.LOG_DIR ?? "./logs");
