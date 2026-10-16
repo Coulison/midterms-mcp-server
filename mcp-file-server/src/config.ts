@@ -10,3 +10,9 @@ export const MAX_FILE_BYTES = 1_000_000;
 
 export const MCP_PATH_SECRET = process.env.MCP_PATH_SECRET ?? "";
 export const LOG_DIR = path.resolve(process.env.LOG_DIR ?? "./logs");
+
+export const ROLE_SECRETS = {
+  admin: process.env.MCP_PATH_SECRET ?? "",
+  worker: process.env.MCP_SECRET_WORKER ?? "",
+  reviewer: process.env.MCP_SECRET_REVIEWER ?? "",
+};

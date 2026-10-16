@@ -1,5 +1,6 @@
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { audit, summarize } from "./audit.js";
+import { ROLE_TOOLS, type Role } from "./roles.js";
 import { registerListFiles } from "./tools/listFiles.js";
 import { registerReadFile } from "./tools/readFile.js";
 import { registerWriteFile } from "./tools/writeFile.js";
@@ -8,13 +9,23 @@ import { registerDeleteFile } from "./tools/deleteFile.js";
 import { registerAppendFile } from "./tools/appendFile.js";
 import { registerGitTools } from "./tools/gitTools.js";
 
-const INSTRUCTIONS =
+const BASE_INSTRUCTIONS =
   "Shared workspace with a handoff protocol. At the start of a session read HANDOFF.md, then the " +
   "project's PROJECT_STATE.md, and call git_status. Read before you write. PLAN_LOG.md, CHECKPOINTS.md and " +
-  "DECISIONS.md are append-only: use append_file. End every session by updating PROJECT_STATE.md and calling git_commit.";
+  "DECISIONS.md are append-only: use append_file.";
 
-// Wrap registerTool so every call is written to logs/calls.jsonl.
-function withAudit(server: McpServer) {
+const ROLE_NOTE: Record<Role, string> = {
+  admin: " Role: admin (all tools).",
+  worker:
+    " Role: worker. You can read, write, edit, append and commit; you cannot delete files. " +
+    "End every session by rewriting PROJECT_STATE.md and calling git_commit.",
+  reviewer:
+    " Role: reviewer. You are read-only apart from append_file: record findings in PLAN_LOG.md, " +
+    "CHECKPOINTS.md or DECISIONS.md. Do not edit other files and do not commit; the next worker session applies fixes.",
+};
+
+// Wrap registerTool so every call is written to logs/calls.jsonl, tagged with the role.
+function withAudit(server: McpServer, role: Role) {
   const original = (server.registerTool as any).bind(server);
   (server as any).registerTool = (name: string, config: unknown, cb: (...a: any[]) => Promise<any>) =>
     original(name, config, async (...cbArgs: any[]) => {
@@ -25,6 +36,7 @@ function withAudit(server: McpServer) {
         const text = (result.content ?? []).map((c: any) => c.text ?? "").join("");
         void audit({
           ts: new Date().toISOString(),
+          role,
           tool: name,
           args: summarize(args),
           ok: !result.isError,
@@ -36,6 +48,7 @@ function withAudit(server: McpServer) {
       } catch (err) {
         void audit({
           ts: new Date().toISOString(),
+          role,
           tool: name,
           args: summarize(args),
           ok: false,
@@ -47,15 +60,19 @@ function withAudit(server: McpServer) {
     });
 }
 
-export function createServer() {
-  const server = new McpServer({ name: "ascent-file-server", version: "0.4.0" }, { instructions: INSTRUCTIONS });
-  withAudit(server);
-  registerListFiles(server);
-  registerReadFile(server);
-  registerWriteFile(server);
-  registerStrReplace(server);
-  registerDeleteFile(server);
-  registerAppendFile(server);
-  registerGitTools(server);
+export function createServer(role: Role = "admin") {
+  const server = new McpServer(
+    { name: "ascent-file-server", version: "0.5.0" },
+    { instructions: BASE_INSTRUCTIONS + ROLE_NOTE[role] }
+  );
+  withAudit(server, role);
+  const allow = (name: string) => ROLE_TOOLS[role].includes(name);
+  if (allow("list_files")) registerListFiles(server);
+  if (allow("read_file")) registerReadFile(server);
+  if (allow("write_file")) registerWriteFile(server);
+  if (allow("str_replace")) registerStrReplace(server);
+  if (allow("delete_file")) registerDeleteFile(server);
+  if (allow("append_file")) registerAppendFile(server);
+  registerGitTools(server, allow);
   return server;
 }

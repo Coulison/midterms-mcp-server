@@ -11,8 +11,8 @@ const clip = (s: string) =>
   s.length > MAX_OUT ? s.slice(0, MAX_OUT) + `\n[truncated at ${MAX_OUT} characters: pass a path to narrow it]` : s;
 const rel = (abs: string) => path.relative(WORKSPACE_ROOT, abs) || ".";
 
-export function registerGitTools(server: McpServer) {
-  server.registerTool(
+export function registerGitTools(server: McpServer, allow: (name: string) => boolean = () => true) {
+  if (allow("git_status")) server.registerTool(
     "git_status",
     {
       description:
@@ -29,7 +29,7 @@ export function registerGitTools(server: McpServer) {
     }
   );
 
-  server.registerTool(
+  if (allow("git_diff")) server.registerTool(
     "git_diff",
     {
       description:
@@ -52,7 +52,7 @@ export function registerGitTools(server: McpServer) {
     }
   );
 
-  server.registerTool(
+  if (allow("git_commit")) server.registerTool(
     "git_commit",
     {
       description:

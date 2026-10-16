@@ -151,3 +151,22 @@ Format: date · milestone · what was done · decisions and why · evidence · n
 - Commit operations use `--no-verify` as defense-in-depth alongside sandbox `.git` blocking.
 - `logs/` directory placed outside `workspace/` and ignored in `.gitignore` so agent sessions cannot alter or delete the audit log.
 
+---
+
+## 2026-10-17 · M5 Prove it · IN PROGRESS
+
+**Plan**
+- Role-scoped endpoints: one secret URL per role, tool sets enforced by the server (worker 8 tools, reviewer 5, admin 9). Audit log entries carry the role.
+- Multi-session demo task across worker and reviewer sessions; evidence copied to `evidence/demo-run/`.
+
+**Decisions**
+- Roles are enforced server-side, so a client cannot enable a tool its role does not have. Only admin has delete_file.
+
+**Known limit (threat notes)**
+- The reviewer's append_file can still add text to any workspace file. Narrowing it to log files is a stretch item.
+
+**Evidence (fill in)**
+- Inspector: worker URL lists ___ tools, reviewer URL lists ___ tools.
+- `npm test`: 45 passing.
+
+
