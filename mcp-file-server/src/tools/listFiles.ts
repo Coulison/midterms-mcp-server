@@ -23,7 +23,7 @@ export function registerListFiles(server: McpServer) {
                 const abs = await resolveSafe(dir);
                 const entries = await readdir(abs, { withFileTypes: true });
                 const lines = await Promise.all(
-                    entries.map(async (e) => {
+                    entries.filter((e) => e.name.toLowerCase() !== ".git").map(async (e) => {
                         if (e.isSymbolicLink()) return `link  ${e.name}`;
                         if (e.isDirectory()) return `dir   ${e.name}/`;
                         const { size } = await stat(join(abs, e.name));

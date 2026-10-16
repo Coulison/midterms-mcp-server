@@ -10,6 +10,18 @@ function isInside(root: string, target: string): boolean {
     return rel !== ".." && !rel.startsWith(".." + path.sep) && !path.isAbsolute(rel);
 }
 
+function assertNotReserved(root: string, resolved: string) {
+    const rel = path.relative(root, resolved);
+    if (!rel) return;
+    for (const seg of rel.split(path.sep)) {
+        const s = seg.replace(/[. ]+$/, "").toLowerCase();
+        if (s === ".git")
+            throw new SandboxError("Access to .git is not allowed. Use the git_* tools.");
+        if (/^[^.]{1,6}~\d+(\.[^.]*)?$/.test(s))
+            throw new SandboxError("Windows short (8.3) names like NAME~1 are not allowed.");
+    }
+}
+
 export async function resolveSafe(userPath: string, root: string = WORKSPACE_ROOT): Promise<string> {
     if (userPath.includes("\0")) throw new SandboxError("Path contains a null byte.");
     if (userPath.includes(":"))
@@ -21,6 +33,7 @@ export async function resolveSafe(userPath: string, root: string = WORKSPACE_ROO
 
     const resolved = path.resolve(root, cleaned);
     if (!isInside(root, resolved)) throw new SandboxError("Path escapes the workspace root.");
+    assertNotReserved(root, resolved);
 
     // Symlink / junction check: walk up to the nearest existing ancestor.
     const realRoot = await realpath(root);

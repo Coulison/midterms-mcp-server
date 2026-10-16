@@ -3,6 +3,7 @@ import { z } from "zod";
 import type { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { resolveSafe } from "../sandbox.js";
 import { fail, ok, toToolError } from "./util.js";
+import { assertCanRewrite, assertTextContent } from "../guards.js";
 
 export function registerStrReplace(server: McpServer) {
     server.registerTool(
@@ -11,7 +12,8 @@ export function registerStrReplace(server: McpServer) {
             description:
                 "Replace one exact occurrence of old_str in a file with new_str. " +
                 "old_str must appear exactly once or the call fails, so widen the match with surrounding text. " +
-                "Read the file first so old_str matches exactly, including whitespace.",
+                "Read the file first so old_str matches exactly, including whitespace. " +
+                "Cannot edit PLAN_LOG.md, CHECKPOINTS.md or DECISIONS.md (append-only; use append_file).",
             inputSchema: {
                 path: z.string().min(1).describe("File path relative to the workspace root."),
                 old_str: z.string().min(1).describe("Exact text to find. Must be unique in the file."),
@@ -21,6 +23,8 @@ export function registerStrReplace(server: McpServer) {
         async ({ path: p, old_str, new_str }) => {
             try {
                 const abs = await resolveSafe(p);
+                assertCanRewrite(abs);
+                assertTextContent(new_str);
                 const text = await readFile(abs, "utf8");
                 const first = text.indexOf(old_str);
                 if (first === -1) return fail("old_str was not found. Re-read the file and copy the text exactly.");

@@ -1,4 +1,5 @@
 import { SandboxError } from "../sandbox.js";
+import { GuardError } from "../guards.js";
 
 export const ok = (text: string) => ({
     content: [{ type: "text" as const, text }],
@@ -20,6 +21,7 @@ const MESSAGES: Record<string, string> = {
 
 export function toToolError(err: unknown) {
     if (err instanceof SandboxError) return fail(`Blocked: ${err.message}`);
+    if (err instanceof GuardError) return fail(`Refused: ${err.message}`);
     const code = (err as NodeJS.ErrnoException)?.code;
     if (code && MESSAGES[code]) return fail(MESSAGES[code]);
     console.error("Unexpected tool error:", err);

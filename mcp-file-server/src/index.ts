@@ -4,6 +4,7 @@ import type { Request, Response } from "express";
 import { StreamableHTTPServerTransport } from "@modelcontextprotocol/sdk/server/streamableHttp.js";
 import { createServer } from "./server.js";
 import { MCP_PATH_SECRET, PORT, WORKSPACE_ROOT } from "./config.js";
+import { ensureRepo } from "./git.js";
 
 // Refuse to start without a strong secret.
 if (MCP_PATH_SECRET.length < 32) {
@@ -51,6 +52,12 @@ const notAllowed = (_req: Request, res: Response) => {
 };
 app.get(MCP_ROUTE, notAllowed);
 app.delete(MCP_ROUTE, notAllowed);
+
+try {
+    await ensureRepo();
+} catch (err) {
+    console.warn("git-lite disabled:", (err as Error).message);
+}
 
 // 127.0.0.1 only: the tunnel reaches us locally, the LAN can't.
 app.listen(PORT, "127.0.0.1", () => {

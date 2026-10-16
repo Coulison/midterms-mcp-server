@@ -35,6 +35,12 @@ const bad = [
     "file.txt:stream",
     "link/secret.txt",
     "link/newfile.txt",
+    ".git/config",
+    ".GIT/hooks/pre-commit",
+    "demo/.git/config",
+    ".git./config",
+    "GIT~1/config",
+    "PLAN_L~1.MD",
 ];
 for (const p of bad) {
     test(`rejects ${JSON.stringify(p)}`, async () => {
@@ -42,7 +48,17 @@ for (const p of bad) {
     });
 }
 
-for (const p of [".", "", "demo", "demo/new.txt", "./a/b/c.txt", "..foo"]) {
+for (const p of [
+    ".",
+    "",
+    "demo",
+    "demo/new.txt",
+    "./a/b/c.txt",
+    "..foo",
+    ".gitignore",
+    ".github/workflows/x.yml",
+    "notes.git/readme.txt",
+]) {
     test(`accepts ${JSON.stringify(p)}`, async () => {
         const abs = await resolveSafe(p, root);
         assert.ok(abs === root || abs.startsWith(root + path.sep));
