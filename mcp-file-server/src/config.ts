@@ -16,3 +16,5 @@ export const ROLE_SECRETS = {
   worker: process.env.MCP_SECRET_WORKER ?? "",
   reviewer: process.env.MCP_SECRET_REVIEWER ?? "",
 };
+
+export const MAX_BATCH_FILE_CHARS = 8_000;

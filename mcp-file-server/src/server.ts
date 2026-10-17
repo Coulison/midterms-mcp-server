@@ -3,16 +3,19 @@ import { audit, summarize } from "./audit.js";
 import { ROLE_TOOLS, type Role } from "./roles.js";
 import { registerListFiles } from "./tools/listFiles.js";
 import { registerReadFile } from "./tools/readFile.js";
+import { registerReadFiles } from "./tools/readFiles.js";
 import { registerWriteFile } from "./tools/writeFile.js";
 import { registerStrReplace } from "./tools/strReplace.js";
 import { registerDeleteFile } from "./tools/deleteFile.js";
 import { registerAppendFile } from "./tools/appendFile.js";
 import { registerGitTools } from "./tools/gitTools.js";
+import { registerSessionStart } from "./tools/sessionStart.js";
 
 const BASE_INSTRUCTIONS =
-  "Shared workspace with a handoff protocol. At the start of a session read HANDOFF.md, then the " +
-  "project's PROJECT_STATE.md, and call git_status. Read before you write. PLAN_LOG.md, CHECKPOINTS.md and " +
-  "DECISIONS.md are append-only: use append_file.";
+  "Shared workspace with a handoff protocol. Start every session by calling session_start with the project name: " +
+  "it returns the protocol, PROJECT_STATE.md and git status in one call. Read before you write, and make independent " +
+  "calls together (read_files reads several files at once). PLAN_LOG.md, CHECKPOINTS.md and DECISIONS.md are " +
+  "append-only: use append_file.";
 
 const ROLE_NOTE: Record<Role, string> = {
   admin: " Role: admin (all tools).",
@@ -62,11 +65,13 @@ function withAudit(server: McpServer, role: Role) {
 
 export function createServer(role: Role = "admin") {
   const server = new McpServer(
-    { name: "ascent-file-server", version: "0.5.0" },
+    { name: "ascent-file-server", version: "0.6.0" },
     { instructions: BASE_INSTRUCTIONS + ROLE_NOTE[role] }
   );
   withAudit(server, role);
   const allow = (name: string) => ROLE_TOOLS[role].includes(name);
+  if (allow("session_start")) registerSessionStart(server, role);
+  if (allow("read_files")) registerReadFiles(server);
   if (allow("list_files")) registerListFiles(server);
   if (allow("read_file")) registerReadFile(server);
   if (allow("write_file")) registerWriteFile(server);

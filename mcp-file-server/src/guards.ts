@@ -24,3 +24,6 @@ export function assertTextContent(content: string) {
     if (content.includes("\0"))
         throw new GuardError("Content contains a null byte. Only text files are supported.");
 }
+
+// A read problem with a message that is already agent-friendly (no prefix needed).
+export class ReadError extends Error {}
