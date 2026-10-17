@@ -153,7 +153,7 @@ Format: date · milestone · what was done · decisions and why · evidence · n
 
 ---
 
-## 2026-10-17 · M5 Prove it · IN PROGRESS
+## 2026-10-17 · M5 Prove it · DONE
 
 **Plan**
 - Role-scoped endpoints: one secret URL per role, tool sets enforced by the server (worker 8 tools, reviewer 5, admin 9). Audit log entries carry the role.
@@ -196,3 +196,12 @@ Format: date · milestone · what was done · decisions and why · evidence · n
 
 
 
+
+## Efficiency improvement
+- Baseline log showed 9 of 30 calls (30%) were session startup and reads were made one at a time.
+- Added session_start and read_files; prompts now say to make independent calls together.
+- Same task on a fresh project (demo2): 19 calls vs 30 (-37%), 0 errors both times; startup 3 calls -> 1 per session.
+- Limits: the client still issued calls sequentially (2-7 s apart), so savings come from server-side batching, not parallel calls; server and prompts changed together.
+
+## Final status
+- 11/10/7 tools (admin/worker/reviewer), 46 tests passing, both pm2 apps online, tunnel verified, secret rotated once after exposure.
