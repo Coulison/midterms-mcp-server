@@ -1,0 +1,18 @@
+﻿28b8486 evidence: multi-session improved run (demo2: 3 sessions, 19 calls, 0 errors)
+df31459 config: move NGROK_DOMAIN to .env and ecosystem.config.cjs
+6ca9c8e efficiency: add session_start and read_files; move handoff protocol into the server
+ee3aeda docs: add baseline multi-session run results to BUILD_LOG.md
+86e588c evidence: multi-session baseline run (3 sessions, 30 calls, 0 errors)
+bf6cebf docs: record M5 Part 1 inspector tool counts in BUILD_LOG.md
+b03c3a6 M5: role-scoped endpoints (admin, worker, reviewer) with per-role audit tagging
+751c1dd M4: guards, append_file, git-lite tools, audit log, handoff protocol
+16dcc8a docs: rename build log to BUILD_LOG.md to distinguish it from agent handoff logs
+16ebd92 M4: add audit log, append_file and git-lite tools (status, diff, commit)
+34d364c M4: add write guards, append-only handoff logs, .git and 8.3-name blocking
+bb029a4 docs: complete M3 evidence and record secret rotation
+ef73339 M3: require secret path segment on MCP endpoint; load config from .env
+4070dc7 M2: updated PLAN_LOG.md, read_file, write_file, str_replace, delete_file; list_files accepts path
+48c7bb6 M2: add resolveSafe sandbox with path-escape tests
+0c0107b M1: added screenshots from mcp inspector
+77e8288 M1: skeleton server with list_files, verified in MCP Inspector
+a95d6b9 M1: skeleton server with list_files, verified in MCP Inspector

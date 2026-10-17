@@ -1,0 +1,10 @@
+﻿1f680fd session 3: add quiz.md and README.md, project done
+ba3dbd6 session 1: draft outline.md and glossary.md
+403c8b3 seed demo2 for the efficiency re-run
+669e411 handoff: protocol now served by session_start
+626fb8d session 3: add quiz.md and README.md, project done
+b9a4bea session 1: draft outline.md and glossary.md
+2db426c seed demo brief, source notes and reviewer handoff note
+0bb8492 handoff: document roles
+3c1be96 reset demo handoff files before M5
+793555a M4 baseline

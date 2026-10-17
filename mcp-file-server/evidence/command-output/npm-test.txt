@@ -1,0 +1,58 @@
+﻿
+> mcp-file-server@1.0.0 test
+> node --import tsx --test tests/sandbox.test.ts tests/guards.test.ts tests/roles.test.ts
+
+Γ£ö rewrite refused: PLAN_LOG.md (1.2812ms)
+Γ£ö rewrite refused: projects/demo/plan_log.md (0.1565ms)
+Γ£ö rewrite refused: CHECKPOINTS.md (0.1316ms)
+Γ£ö rewrite refused: Decisions.MD (0.1147ms)
+Γ£ö rewrite refused: PLAN_LOG.md. (0.1459ms)
+Γ£ö rewrite allowed: PROJECT_STATE.md (0.2178ms)
+Γ£ö rewrite allowed: notes/a.txt (0.1126ms)
+Γ£ö rewrite allowed: PLAN_LOG_old.md (0.0972ms)
+Γ£ö delete refused: PROJECT_STATE.md (0.2068ms)
+Γ£ö delete refused: x/plan_log.md (0.2731ms)
+Γ£ö delete refused: DECISIONS.md (0.1183ms)
+Γ£ö delete allowed: notes/a.txt (0.1401ms)
+Γ£ö null byte refused (0.1603ms)
+Γ£ö plain text accepted (0.1162ms)
+Γ£ö admin has all eleven tools (0.8328ms)
+Γ£ö worker has ten and reviewer has seven (0.1361ms)
+Γ£ö only admin can delete (0.146ms)
+Γ£ö reviewer cannot write, replace or commit (0.1506ms)
+Γ£ö every role can start a session, read in batches and append (0.1702ms)
+Γ£ö rejects "../outside/secret.txt" (9.0986ms)
+Γ£ö rejects "..\\outside\\secret.txt" (0.3121ms)
+Γ£ö rejects "demo/../../outside/secret.txt" (0.2323ms)
+Γ£ö rejects "/etc/passwd" (0.1169ms)
+Γ£ö rejects "C:\\Windows\\win.ini" (0.1083ms)
+Γ£ö rejects "C:foo" (0.0868ms)
+Γ£ö rejects "\\\\server\\share\\x" (0.1021ms)
+Γ£ö rejects "a\u0000b" (0.1011ms)
+Γ£ö rejects "file.txt:stream" (0.1305ms)
+Γ£ö rejects "link/secret.txt" (1.8654ms)
+Γ£ö rejects "link/newfile.txt" (0.675ms)
+Γ£ö rejects ".git/config" (0.2325ms)
+Γ£ö rejects ".GIT/hooks/pre-commit" (0.0983ms)
+Γ£ö rejects "demo/.git/config" (0.1211ms)
+Γ£ö rejects ".git./config" (0.0999ms)
+Γ£ö rejects "GIT~1/config" (0.0871ms)
+Γ£ö rejects "PLAN_L~1.MD" (0.0785ms)
+Γ£ö accepts "." (2.2306ms)
+Γ£ö accepts "" (0.4687ms)
+Γ£ö accepts "demo" (0.6509ms)
+Γ£ö accepts "demo/new.txt" (0.657ms)
+Γ£ö accepts "./a/b/c.txt" (0.8374ms)
+Γ£ö accepts "..foo" (0.5726ms)
+Γ£ö accepts ".gitignore" (0.541ms)
+Γ£ö accepts ".github/workflows/x.yml" (0.9843ms)
+Γ£ö accepts "notes.git/readme.txt" (0.6853ms)
+Γ£ö normalises inner .. (0.73ms)
+Γä╣ tests 46
+Γä╣ suites 0
+Γä╣ pass 46
+Γä╣ fail 0
+Γä╣ cancelled 0
+Γä╣ skipped 0
+Γä╣ todo 0
+Γä╣ duration_ms 200.5582

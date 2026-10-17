@@ -1,0 +1,71 @@
+{"ts":"2026-10-16T22:55:11.550Z","tool":"append_file","args":{"path":"projects/demo/PLAN_LOG.md","content":"<10 chars>"},"ok":true,"ms":3,"out_chars":47}
+{"ts":"2026-10-16T22:55:45.583Z","tool":"write_file","args":{"path":"projects/demo/PLAN_LOG.md","content":"<1 chars>","overwrite":false},"ok":false,"ms":2,"out_chars":87,"error":"File already exists. Read it first, then retry with overwrite=true, or use str_replace."}
+{"ts":"2026-10-16T22:57:47.548Z","tool":"str_replace","args":{"path":"projects/demo/PLAN_LOG.md","old_str":"<1 chars>","new_str":"<1 chars>"},"ok":false,"ms":1,"out_chars":64,"error":"Refused: PLAN_LOG.md is append-only. Add to it with append_file."}
+{"ts":"2026-10-16T22:58:18.709Z","tool":"delete_file","args":{"path":"projects/demo/PROJECT_STATE.md","confirm":true},"ok":false,"ms":0,"out_chars":66,"error":"Refused: PROJECT_STATE.md is a handoff file and cannot be deleted."}
+{"ts":"2026-10-16T22:59:13.707Z","tool":"delete_file","args":{"path":"notes/hello.txt","confirm":false},"ok":false,"ms":1,"out_chars":65,"error":"Not deleted: set confirm=true to confirm this permanent deletion."}
+{"ts":"2026-10-16T22:59:48.516Z","tool":"read_file","args":{"path":".git/config","start_line":1,"end_line":4},"ok":false,"ms":0,"out_chars":60,"error":"Blocked: Access to .git is not allowed. Use the git_* tools."}
+{"ts":"2026-10-16T23:00:29.876Z","tool":"write_file","args":{"path":"notes/hello.txt","content":"<1 chars>","overwrite":true},"ok":false,"ms":1,"out_chars":106,"error":"Refused: this would replace a non-empty file with empty content. Use delete_file if you mean to remove it."}
+{"ts":"2026-10-16T23:00:47.258Z","tool":"git_status","args":{},"ok":true,"ms":73,"out_chars":75}
+{"ts":"2026-10-16T23:01:35.307Z","tool":"git_commit","args":{"message":"M4 baseline"},"ok":true,"ms":414,"out_chars":29}
+{"ts":"2026-10-16T23:01:58.998Z","tool":"git_commit","args":{"message":"M4 baseline"},"ok":true,"ms":139,"out_chars":30}
+{"ts":"2026-10-16T23:09:51.872Z","tool":"write_file","args":{"path":"projects/demo/PLAN_LOG.md","content":"<1 chars>","overwrite":true},"ok":false,"ms":2,"out_chars":64,"error":"Refused: PLAN_LOG.md is append-only. Add to it with append_file."}
+{"ts":"2026-10-17T01:45:11.007Z","role":"worker","tool":"read_file","args":{"path":"HANDOFF.md","start_line":1},"ok":true,"ms":5,"out_chars":1401}
+{"ts":"2026-10-17T01:45:12.751Z","role":"worker","tool":"read_file","args":{"path":"projects/demo/PROJECT_STATE.md","start_line":1},"ok":true,"ms":2,"out_chars":1313}
+{"ts":"2026-10-17T01:45:18.261Z","role":"worker","tool":"git_status","args":{},"ok":true,"ms":77,"out_chars":7}
+{"ts":"2026-10-17T01:45:20.937Z","role":"worker","tool":"read_file","args":{"path":"projects/demo/source/notes.md","start_line":1},"ok":true,"ms":1,"out_chars":1864}
+{"ts":"2026-10-17T01:45:28.265Z","role":"worker","tool":"write_file","args":{"path":"projects/demo/kit/outline.md","content":"<1909 chars>","overwrite":false},"ok":true,"ms":7,"out_chars":49}
+{"ts":"2026-10-17T01:45:33.031Z","role":"worker","tool":"write_file","args":{"path":"projects/demo/kit/glossary.md","content":"<1350 chars>","overwrite":false},"ok":true,"ms":2,"out_chars":50}
+{"ts":"2026-10-17T01:45:37.956Z","role":"worker","tool":"append_file","args":{"path":"projects/demo/PLAN_LOG.md","content":"<476 chars>"},"ok":true,"ms":3,"out_chars":48}
+{"ts":"2026-10-17T01:45:42.805Z","role":"worker","tool":"write_file","args":{"path":"projects/demo/PROJECT_STATE.md","content":"<1505 chars>","overwrite":true},"ok":true,"ms":3,"out_chars":51}
+{"ts":"2026-10-17T01:45:47.132Z","role":"worker","tool":"git_commit","args":{"message":"session 1: draft outline.md and glossary.md"},"ok":true,"ms":347,"out_chars":29}
+{"ts":"2026-10-17T01:56:23.698Z","role":"reviewer","tool":"read_file","args":{"path":"HANDOFF.md","start_line":1},"ok":true,"ms":2,"out_chars":1401}
+{"ts":"2026-10-17T01:56:26.186Z","role":"reviewer","tool":"read_file","args":{"path":"projects/demo/PROJECT_STATE.md","start_line":1},"ok":true,"ms":1,"out_chars":1554}
+{"ts":"2026-10-17T01:56:30.698Z","role":"reviewer","tool":"git_status","args":{},"ok":true,"ms":69,"out_chars":7}
+{"ts":"2026-10-17T01:56:32.653Z","role":"reviewer","tool":"read_file","args":{"path":"projects/demo/kit/outline.md","start_line":1},"ok":true,"ms":2,"out_chars":1956}
+{"ts":"2026-10-17T01:56:34.820Z","role":"reviewer","tool":"read_file","args":{"path":"projects/demo/kit/glossary.md","start_line":1},"ok":true,"ms":3,"out_chars":1398}
+{"ts":"2026-10-17T01:56:37.982Z","role":"reviewer","tool":"read_file","args":{"path":"projects/demo/source/notes.md","start_line":1},"ok":true,"ms":1,"out_chars":1864}
+{"ts":"2026-10-17T01:56:46.717Z","role":"reviewer","tool":"append_file","args":{"path":"projects/demo/PLAN_LOG.md","content":"<1024 chars>"},"ok":true,"ms":2,"out_chars":49}
+{"ts":"2026-10-17T01:56:50.245Z","role":"reviewer","tool":"append_file","args":{"path":"projects/demo/CHECKPOINTS.md","content":"<527 chars>"},"ok":true,"ms":11,"out_chars":51}
+{"ts":"2026-10-17T01:58:46.178Z","role":"worker","tool":"read_file","args":{"path":"HANDOFF.md","start_line":1},"ok":true,"ms":2,"out_chars":1401}
+{"ts":"2026-10-17T01:58:48.062Z","role":"worker","tool":"read_file","args":{"path":"projects/demo/PROJECT_STATE.md","start_line":1},"ok":true,"ms":1,"out_chars":1554}
+{"ts":"2026-10-17T01:58:49.641Z","role":"worker","tool":"git_status","args":{},"ok":true,"ms":68,"out_chars":68}
+{"ts":"2026-10-17T01:58:55.991Z","role":"worker","tool":"git_diff","args":{"stat_only":false},"ok":true,"ms":79,"out_chars":2531}
+{"ts":"2026-10-17T01:58:59.126Z","role":"worker","tool":"read_file","args":{"path":"projects/demo/source/notes.md","start_line":1},"ok":true,"ms":2,"out_chars":1864}
+{"ts":"2026-10-17T01:59:01.596Z","role":"worker","tool":"read_file","args":{"path":"projects/demo/kit/glossary.md","start_line":1},"ok":true,"ms":3,"out_chars":1398}
+{"ts":"2026-10-17T01:59:07.240Z","role":"worker","tool":"read_file","args":{"path":"projects/demo/kit/outline.md","start_line":1},"ok":true,"ms":2,"out_chars":1956}
+{"ts":"2026-10-17T01:59:12.572Z","role":"worker","tool":"write_file","args":{"path":"projects/demo/kit/quiz.md","content":"<1541 chars>","overwrite":false},"ok":true,"ms":3,"out_chars":46}
+{"ts":"2026-10-17T01:59:15.488Z","role":"worker","tool":"write_file","args":{"path":"projects/demo/kit/README.md","content":"<430 chars>","overwrite":false},"ok":true,"ms":2,"out_chars":47}
+{"ts":"2026-10-17T01:59:22.785Z","role":"worker","tool":"append_file","args":{"path":"projects/demo/PLAN_LOG.md","content":"<1041 chars>"},"ok":true,"ms":1,"out_chars":49}
+{"ts":"2026-10-17T01:59:26.442Z","role":"worker","tool":"append_file","args":{"path":"projects/demo/CHECKPOINTS.md","content":"<418 chars>"},"ok":true,"ms":2,"out_chars":51}
+{"ts":"2026-10-17T01:59:31.493Z","role":"worker","tool":"write_file","args":{"path":"projects/demo/PROJECT_STATE.md","content":"<1363 chars>","overwrite":true},"ok":true,"ms":2,"out_chars":51}
+{"ts":"2026-10-17T01:59:34.295Z","role":"worker","tool":"git_commit","args":{"message":"session 3: add quiz.md and README.md, project done"},"ok":true,"ms":376,"out_chars":29}
+{"ts":"2026-10-17T06:20:36.846Z","role":"admin","tool":"list_files","args":{"path":"."},"ok":true,"ms":1,"out_chars":110}
+{"ts":"2026-10-17T06:29:42.267Z","role":"admin","tool":"list_files","args":{"path":"."},"ok":true,"ms":1,"out_chars":110}
+{"ts":"2026-10-17T06:33:51.913Z","role":"worker","tool":"session_start","args":{"project":"demo2"},"ok":true,"ms":76,"out_chars":2469}
+{"ts":"2026-10-17T06:33:55.592Z","role":"worker","tool":"read_file","args":{"path":"projects/demo2/source/notes.md","start_line":1},"ok":true,"ms":1,"out_chars":1865}
+{"ts":"2026-10-17T06:34:02.423Z","role":"worker","tool":"write_file","args":{"path":"projects/demo2/kit/outline.md","content":"<1922 chars>","overwrite":false},"ok":true,"ms":3,"out_chars":50}
+{"ts":"2026-10-17T06:34:07.190Z","role":"worker","tool":"write_file","args":{"path":"projects/demo2/kit/glossary.md","content":"<1338 chars>","overwrite":false},"ok":true,"ms":2,"out_chars":51}
+{"ts":"2026-10-17T06:34:10.355Z","role":"worker","tool":"append_file","args":{"path":"projects/demo2/PLAN_LOG.md","content":"<400 chars>"},"ok":true,"ms":2,"out_chars":49}
+{"ts":"2026-10-17T06:34:15.107Z","role":"worker","tool":"write_file","args":{"path":"projects/demo2/PROJECT_STATE.md","content":"<1496 chars>","overwrite":true},"ok":true,"ms":3,"out_chars":52}
+{"ts":"2026-10-17T06:34:18.044Z","role":"worker","tool":"git_commit","args":{"message":"session 1: draft outline.md and glossary.md"},"ok":true,"ms":337,"out_chars":29}
+{"ts":"2026-10-17T06:36:24.667Z","role":"reviewer","tool":"session_start","args":{"project":"demo2"},"ok":true,"ms":68,"out_chars":2671}
+{"ts":"2026-10-17T06:36:26.934Z","role":"reviewer","tool":"read_files","args":{"paths":["projects/demo2/kit/outline.md","projects/demo2/kit/glossary.md","projects/demo2/source/notes.md"]},"ok":true,"ms":3,"out_chars":5240}
+{"ts":"2026-10-17T06:36:31.399Z","role":"reviewer","tool":"append_file","args":{"path":"projects/demo2/PLAN_LOG.md","content":"<612 chars>"},"ok":true,"ms":9,"out_chars":49}
+{"ts":"2026-10-17T06:36:35.845Z","role":"reviewer","tool":"append_file","args":{"path":"projects/demo2/CHECKPOINTS.md","content":"<415 chars>"},"ok":true,"ms":1,"out_chars":52}
+{"ts":"2026-10-17T06:38:16.173Z","role":"worker","tool":"session_start","args":{"project":"demo2"},"ok":true,"ms":66,"out_chars":2761}
+{"ts":"2026-10-17T06:38:18.865Z","role":"worker","tool":"read_files","args":{"paths":["projects/demo2/PLAN_LOG.md","projects/demo2/CHECKPOINTS.md","projects/demo2/source/notes.md","projects/demo2/kit/outline.md","projects/demo2/kit/glossary.md"]},"ok":true,"ms":3,"out_chars":6985}
+{"ts":"2026-10-17T06:38:24.392Z","role":"worker","tool":"write_file","args":{"path":"projects/demo2/kit/quiz.md","content":"<1685 chars>","overwrite":false},"ok":true,"ms":2,"out_chars":47}
+{"ts":"2026-10-17T06:38:27.002Z","role":"worker","tool":"write_file","args":{"path":"projects/demo2/kit/README.md","content":"<242 chars>","overwrite":false},"ok":true,"ms":1,"out_chars":48}
+{"ts":"2026-10-17T06:38:31.254Z","role":"worker","tool":"append_file","args":{"path":"projects/demo2/PLAN_LOG.md","content":"<558 chars>"},"ok":true,"ms":1,"out_chars":49}
+{"ts":"2026-10-17T06:38:34.169Z","role":"worker","tool":"append_file","args":{"path":"projects/demo2/CHECKPOINTS.md","content":"<316 chars>"},"ok":true,"ms":10,"out_chars":52}
+{"ts":"2026-10-17T06:38:38.486Z","role":"worker","tool":"write_file","args":{"path":"projects/demo2/PROJECT_STATE.md","content":"<1229 chars>","overwrite":true},"ok":true,"ms":1,"out_chars":52}
+{"ts":"2026-10-17T06:38:40.638Z","role":"worker","tool":"git_commit","args":{"message":"session 3: add quiz.md and README.md, project done"},"ok":true,"ms":354,"out_chars":29}
+{"ts":"2026-10-17T06:56:52.937Z","role":"admin","tool":"list_files","args":{"path":".."},"ok":false,"ms":0,"out_chars":41,"error":"Blocked: Path escapes the workspace root."}
+{"ts":"2026-10-17T06:56:52.942Z","role":"admin","tool":"read_file","args":{"path":"../package.json","start_line":1},"ok":false,"ms":0,"out_chars":41,"error":"Blocked: Path escapes the workspace root."}
+{"ts":"2026-10-17T06:56:52.946Z","role":"admin","tool":"read_file","args":{"path":".git/config","start_line":1},"ok":false,"ms":0,"out_chars":60,"error":"Blocked: Access to .git is not allowed. Use the git_* tools."}
+{"ts":"2026-10-17T06:56:52.951Z","role":"admin","tool":"write_file","args":{"path":"C:\\temp\\x.txt","content":"<1 chars>","overwrite":false},"ok":false,"ms":0,"out_chars":79,"error":"Blocked: Path must not contain ':' (drive letters and streams are not allowed)."}
+{"ts":"2026-10-17T06:56:52.956Z","role":"worker","tool":"write_file","args":{"path":"projects/demo/PLAN_LOG.md","content":"<1 chars>","overwrite":true},"ok":false,"ms":1,"out_chars":64,"error":"Refused: PLAN_LOG.md is append-only. Add to it with append_file."}
+{"ts":"2026-10-17T06:56:52.961Z","role":"worker","tool":"str_replace","args":{"path":"projects/demo/PLAN_LOG.md","old_str":"<8 chars>","new_str":"<1 chars>"},"ok":false,"ms":1,"out_chars":64,"error":"Refused: PLAN_LOG.md is append-only. Add to it with append_file."}
+{"ts":"2026-10-17T06:56:52.965Z","role":"admin","tool":"delete_file","args":{"path":"projects/demo/PROJECT_STATE.md","confirm":true},"ok":false,"ms":0,"out_chars":66,"error":"Refused: PROJECT_STATE.md is a handoff file and cannot be deleted."}
+{"ts":"2026-10-17T06:56:52.969Z","role":"admin","tool":"delete_file","args":{"path":"projects/demo/source/notes.md","confirm":false},"ok":false,"ms":0,"out_chars":65,"error":"Not deleted: set confirm=true to confirm this permanent deletion."}
+{"ts":"2026-10-17T06:56:53.453Z","role":"admin","tool":"list_files","args":{"path":"."},"ok":true,"ms":1,"out_chars":110}

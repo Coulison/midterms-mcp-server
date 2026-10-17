@@ -1,0 +1,73 @@
+﻿## Baseline run (demo)
+
+Session Role     Calls Errors
+------- ----     ----- ------
+1       worker       9      0
+2       reviewer     8      0
+3       worker      13      0
+Total calls: 30
+
+session role     tool          ok gap_s out_chars target                        
+------- ----     ----          -- ----- --------- ------                        
+      1 worker   read_file   True            1401 HANDOFF.md                    
+      1 worker   read_file   True 1.7        1313 projects/demo/PROJECT_STATE.md
+      1 worker   git_status  True 5.5           7                               
+      1 worker   read_file   True 2.7        1864 projects/demo/source/notes.md 
+      1 worker   write_file  True 7.3          49 projects/demo/kit/outline.md  
+      1 worker   write_file  True 4.8          50 projects/demo/kit/glossary.md 
+      1 worker   append_file True 4.9          48 projects/demo/PLAN_LOG.md     
+      1 worker   write_file  True 4.8          51 projects/demo/PROJECT_STATE.md
+      1 worker   git_commit  True 4.3          29                               
+      2 reviewer read_file   True            1401 HANDOFF.md                    
+      2 reviewer read_file   True 2.5        1554 projects/demo/PROJECT_STATE.md
+      2 reviewer git_status  True 4.5           7                               
+      2 reviewer read_file   True 2          1956 projects/demo/kit/outline.md  
+      2 reviewer read_file   True 2.2        1398 projects/demo/kit/glossary.md 
+      2 reviewer read_file   True 3.2        1864 projects/demo/source/notes.md 
+      2 reviewer append_file True 8.7          49 projects/demo/PLAN_LOG.md     
+      2 reviewer append_file True 3.5          51 projects/demo/CHECKPOINTS.md  
+      3 worker   read_file   True            1401 HANDOFF.md                    
+      3 worker   read_file   True 1.9        1554 projects/demo/PROJECT_STATE.md
+      3 worker   git_status  True 1.6          68                               
+      3 worker   git_diff    True 6.4        2531                               
+      3 worker   read_file   True 3.1        1864 projects/demo/source/notes.md 
+      3 worker   read_file   True 2.5        1398 projects/demo/kit/glossary.md 
+      3 worker   read_file   True 5.6        1956 projects/demo/kit/outline.md  
+      3 worker   write_file  True 5.3          46 projects/demo/kit/quiz.md     
+      3 worker   write_file  True 2.9          47 projects/demo/kit/README.md   
+      3 worker   append_file True 7.3          49 projects/demo/PLAN_LOG.md     
+      3 worker   append_file True 3.7          51 projects/demo/CHECKPOINTS.md  
+      3 worker   write_file  True 5.1          51 projects/demo/PROJECT_STATE.md
+      3 worker   git_commit  True 2.8          29                               
+
+## Improved run (demo2)
+
+Session Role     Calls Errors
+------- ----     ----- ------
+1       worker       7      0
+2       reviewer     4      0
+3       worker       8      0
+Total calls: 19
+
+session role     tool            ok gap_s out_chars target                                                                                                                                              
+------- ----     ----            -- ----- --------- ------                                                                                                                                              
+      1 worker   session_start True            2469 project: demo2                                                                                                                                      
+      1 worker   read_file     True 3.7        1865 projects/demo2/source/notes.md                                                                                                                      
+      1 worker   write_file    True 6.8          50 projects/demo2/kit/outline.md                                                                                                                       
+      1 worker   write_file    True 4.8          51 projects/demo2/kit/glossary.md                                                                                                                      
+      1 worker   append_file   True 3.2          49 projects/demo2/PLAN_LOG.md                                                                                                                          
+      1 worker   write_file    True 4.8          52 projects/demo2/PROJECT_STATE.md                                                                                                                     
+      1 worker   git_commit    True 2.9          29                                                                                                                                                     
+      2 reviewer session_start True            2671 project: demo2                                                                                                                                      
+      2 reviewer read_files    True 2.3        5240 projects/demo2/kit/outline.md, projects/demo2/kit/glossary.md, projects/demo2/source/notes.md                                                       
+      2 reviewer append_file   True 4.5          49 projects/demo2/PLAN_LOG.md                                                                                                                          
+      2 reviewer append_file   True 4.4          52 projects/demo2/CHECKPOINTS.md                                                                                                                       
+      3 worker   session_start True            2761 project: demo2                                                                                                                                      
+      3 worker   read_files    True 2.7        6985 projects/demo2/PLAN_LOG.md, projects/demo2/CHECKPOINTS.md, projects/demo2/source/notes.md, projects/demo2/kit/outline.md, projects/demo2/kit/glos...
+      3 worker   write_file    True 5.5          47 projects/demo2/kit/quiz.md                                                                                                                          
+      3 worker   write_file    True 2.6          48 projects/demo2/kit/README.md                                                                                                                        
+      3 worker   append_file   True 4.3          49 projects/demo2/PLAN_LOG.md                                                                                                                          
+      3 worker   append_file   True 2.9          52 projects/demo2/CHECKPOINTS.md                                                                                                                       
+      3 worker   write_file    True 4.3          52 projects/demo2/PROJECT_STATE.md                                                                                                                     
+      3 worker   git_commit    True 2.2          29                                                                                                                                                     
+

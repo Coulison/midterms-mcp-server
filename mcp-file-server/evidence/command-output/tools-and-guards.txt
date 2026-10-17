@@ -1,0 +1,25 @@
+# Evidence collected 2026-10-17T06:56:52.838Z
+
+## Tools per role (live tools/list)
+admin     11 tools: session_start, read_files, list_files, read_file, write_file, str_replace, delete_file, append_file, git_status, git_diff, git_commit
+worker    10 tools: session_start, read_files, list_files, read_file, write_file, str_replace, append_file, git_status, git_diff, git_commit
+reviewer  7 tools: session_start, read_files, list_files, read_file, append_file, git_status, git_diff
+
+## Sandbox and guard probes (every one should be refused)
+REFUSED  list_files path '..': Blocked: Path escapes the workspace root.
+REFUSED  read_file ../package.json: Blocked: Path escapes the workspace root.
+REFUSED  read_file .git/config: Blocked: Access to .git is not allowed. Use the git_* tools.
+REFUSED  write_file C:\temp\x.txt: Blocked: Path must not contain ':' (drive letters and streams are not allowed).
+REFUSED  write_file overwrite PLAN_LOG.md: Refused: PLAN_LOG.md is append-only. Add to it with append_file.
+REFUSED  str_replace on PLAN_LOG.md: Refused: PLAN_LOG.md is append-only. Add to it with append_file.
+REFUSED  delete_file on PROJECT_STATE.md: Refused: PROJECT_STATE.md is a handoff file and cannot be deleted.
+REFUSED  delete_file without confirm: Not deleted: set confirm=true to confirm this permanent deletion.
+
+## Role separation (tools a role does not have)
+REFUSED  worker calls delete_file: MCP error -32602: Tool delete_file not found
+REFUSED  reviewer calls write_file: MCP error -32602: Tool write_file not found
+REFUSED  reviewer calls str_replace: MCP error -32602: Tool str_replace not found
+REFUSED  reviewer calls git_commit: MCP error -32602: Tool git_commit not found
+
+## Public endpoint
+https://try-relish-trimester.ngrok-free.dev/mcp/<secret> list_files -> ok: dir demo/ dir notes/ dir projects/ dir test/ file HANDOFF.md (1731 bytes) file hello.txt (0 bytes)
