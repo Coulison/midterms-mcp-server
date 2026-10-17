@@ -1,0 +1,66 @@
+﻿1f680fd 2026-10-17 14:38:40 +0800 session 3: add quiz.md and README.md, project done
+
+ projects/demo2/CHECKPOINTS.md   |  7 +++++++
+ projects/demo2/PLAN_LOG.md      | 13 +++++++++++++
+ projects/demo2/PROJECT_STATE.md | 10 +++++-----
+ projects/demo2/kit/README.md    |  7 +++++++
+ projects/demo2/kit/quiz.md      | 27 +++++++++++++++++++++++++++
+ 5 files changed, 59 insertions(+), 5 deletions(-)
+ba3dbd6 2026-10-17 14:34:17 +0800 session 1: draft outline.md and glossary.md
+
+ projects/demo2/PLAN_LOG.md      |  5 +++++
+ projects/demo2/PROJECT_STATE.md |  8 ++++----
+ projects/demo2/kit/glossary.md  | 16 ++++++++++++++++
+ projects/demo2/kit/outline.md   | 35 +++++++++++++++++++++++++++++++++++
+ 4 files changed, 60 insertions(+), 4 deletions(-)
+403c8b3 2026-10-17 14:30:03 +0800 seed demo2 for the efficiency re-run
+
+ projects/demo2/CHECKPOINTS.md   |  2 ++
+ projects/demo2/DECISIONS.md     |  2 ++
+ projects/demo2/PLAN_LOG.md      |  2 ++
+ projects/demo2/PROJECT_STATE.md | 26 ++++++++++++++++++++++++++
+ projects/demo2/source/notes.md  | 30 ++++++++++++++++++++++++++++++
+ 5 files changed, 62 insertions(+)
+669e411 2026-10-17 14:18:54 +0800 handoff: protocol now served by session_start
+
+ HANDOFF.md | 35 ++++++++++++++++++-----------------
+ 1 file changed, 18 insertions(+), 17 deletions(-)
+626fb8d 2026-10-17 09:59:34 +0800 session 3: add quiz.md and README.md, project done
+
+ projects/demo/CHECKPOINTS.md   |  8 +++++++-
+ projects/demo/PLAN_LOG.md      | 24 ++++++++++++++++++++++++
+ projects/demo/PROJECT_STATE.md | 10 +++++-----
+ projects/demo/kit/README.md    |  9 +++++++++
+ projects/demo/kit/quiz.md      | 27 +++++++++++++++++++++++++++
+ 5 files changed, 72 insertions(+), 6 deletions(-)
+b9a4bea 2026-10-17 09:45:47 +0800 session 1: draft outline.md and glossary.md
+
+ projects/demo/PLAN_LOG.md      |  6 ++++++
+ projects/demo/PROJECT_STATE.md | 10 +++++-----
+ projects/demo/kit/glossary.md  | 16 ++++++++++++++++
+ projects/demo/kit/outline.md   | 36 ++++++++++++++++++++++++++++++++++++
+ 4 files changed, 63 insertions(+), 5 deletions(-)
+2db426c 2026-10-17 09:37:51 +0800 seed demo brief, source notes and reviewer handoff note
+
+ HANDOFF.md                     |  3 +++
+ projects/demo/PROJECT_STATE.md | 23 ++++++++++++++++-------
+ projects/demo/source/notes.md  | 30 ++++++++++++++++++++++++++++++
+ 3 files changed, 49 insertions(+), 7 deletions(-)
+0bb8492 2026-10-17 07:31:16 +0800 handoff: document roles
+
+ HANDOFF.md | 6 +++++-
+ 1 file changed, 5 insertions(+), 1 deletion(-)
+3c1be96 2026-10-17 07:23:52 +0800 reset demo handoff files before M5
+
+ projects/demo/PLAN_LOG.md | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+793555a 2026-10-17 07:01:35 +0800 M4 baseline
+
+ HANDOFF.md                     | 20 ++++++++++++++++++++
+ hello.txt                      |  0
+ notes/hello.txt                |  1 +
+ projects/demo/CHECKPOINTS.md   |  2 ++
+ projects/demo/DECISIONS.md     |  2 ++
+ projects/demo/PLAN_LOG.md      |  2 ++
+ projects/demo/PROJECT_STATE.md | 17 +++++++++++++++++
+ 7 files changed, 44 insertions(+)

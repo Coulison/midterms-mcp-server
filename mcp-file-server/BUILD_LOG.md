@@ -177,5 +177,22 @@ Format: date · milestone · what was done · decisions and why · evidence · n
 - Observations: startup protocol cost 9 of 30 calls; no parallel batching visible in the timestamps (calls 2-5 s apart).
 - Protocol finding: CP-001 was written before the commit, so it holds a placeholder hash; the real hash is in the workspace git log.
 
+**Multi-session run (demo task: MCP Week 6 Study Kit), improved (`demo2`)**
+- Session 1 (worker): 7 tool calls (budget 8), 0 errors; wrote outline.md and glossary.md; commit ba3dbd6.
+- Session 2 (reviewer): 4 tool calls (budget 6), 0 errors; checked in 1 read_files call, logged findings and checkpoints; no issues found.
+- Session 3 (worker): 8 tool calls (budget 11), 0 errors; read handoff files and notes in 1 read_files call, wrote quiz.md and README.md; Definition of done met; commit 1f680fd.
+- Totals: 19 calls, 0 errors.
+- Startup: 1 call (`session_start`) per session (saved 6 calls across 3 sessions).
+- Batch reading: reviewer read 3 files in 1 `read_files` call; session 3 read 5 files in 1 `read_files` call.
+
+| Metric | Baseline (`demo`) | Improved (`demo2`) | Delta |
+|---|---|---|---|
+| Total calls | 30 | 19 | -11 (-36.7%) |
+| Startup calls per session | 3 (9 total) | 1 (3 total) | -6 (-66.7%) |
+| Reviewer read calls | 3 | 1 (batch of 3) | -2 (-66.7%) |
+| Worker 3 read calls | 5 | 1 (batch of 5) | -4 (-80.0%) |
+| Errors | 0 | 0 | 0 |
+
+
 
 
