@@ -169,4 +169,13 @@ Format: date · milestone · what was done · decisions and why · evidence · n
 - Inspector: worker URL lists 8 tools (all except delete_file), reviewer URL lists 5 tools (list_files, read_file, append_file, git_status, git_diff), admin URL lists all 9 tools.
 - `npm test`: 45 of 45 passing.
 
+**Multi-session run (demo task: MCP Week 6 Study Kit), baseline**
+- Session 1 (worker): 9 tool calls (budget 14), 0 errors; wrote outline.md and glossary.md; commit b9a4bea.
+- Session 2 (reviewer): 8 tool calls (budget 10), 0 errors; no issues found; only read and append tools used.
+- Session 3 (worker): 13 tool calls (budget 16), 0 errors; wrote quiz.md and README.md; Definition of done met; commit 626fb8d.
+- Totals: 30 calls, 0 errors, no repeated calls. Every session read HANDOFF.md, PROJECT_STATE.md and ran git_status first.
+- Observations: startup protocol cost 9 of 30 calls; no parallel batching visible in the timestamps (calls 2-5 s apart).
+- Protocol finding: CP-001 was written before the commit, so it holds a placeholder hash; the real hash is in the workspace git log.
+
+
 
